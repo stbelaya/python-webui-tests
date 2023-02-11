@@ -17,7 +17,8 @@ class TestAddContact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, Contact(firstname="Svetlana", middlename="Borisovna", lastname="Kovaleva",
-                                        nickname="Belaya", photo="C:\\Sync\\YandexDisk\\FoldersForWindows\\Pictures\\LogoLP.jpg",
+                                        nickname="Belaya",
+                                        photo="C:\\Sync\\YandexDisk\\FoldersForWindows\\Pictures\\LogoLP.jpg",
                                         title="Tester", company="The Best",
                                         address="Lenina, 8", mobile="89001001213", home="555555", work="121212",
                                         fax="111111", email="stbelaya@gmail.com", email2="stbelaya2@gmail.com",
