@@ -59,7 +59,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("1985")
         # submit contact creation
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        wd.find_element_by_xpath("//input[@name='submit']").click()
         # return to home page
         wd.find_element_by_link_text("home page").click()
         # logout
