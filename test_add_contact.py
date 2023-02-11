@@ -17,7 +17,8 @@ class TestAddContact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, Contact(firstname="Svetlana", middlename="Borisovna", lastname="Kovaleva",
-                                        nickname="Belaya", title="Tester", company="The Best",
+                                        nickname="Belaya", photo="C:\\Sync\\YandexDisk\\FoldersForWindows\\Pictures\\LogoLP.jpg",
+                                        title="Tester", company="The Best",
                                         address="Lenina, 8", mobile="89001001213", home="555555", work="121212",
                                         fax="111111", email="stbelaya@gmail.com", email2="stbelaya2@gmail.com",
                                         email3="stbelaya3@gmail.com", homepage="google.com", bday="13",
@@ -40,7 +41,6 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        #wd.find_element_by_name("theform").click()
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
         wd.find_element_by_name("middlename").send_keys(contact.middlename)
@@ -50,6 +50,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
+        wd.find_element_by_name("photo").send_keys(contact.photo)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(contact.title)
