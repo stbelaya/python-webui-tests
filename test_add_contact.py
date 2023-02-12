@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
@@ -84,17 +85,13 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
-        wd.find_element_by_name("bday").click()
-        wd.find_element_by_name("bday").send_keys(contact.bday)
-        wd.find_element_by_name("bmonth").click()
-        wd.find_element_by_name("bmonth").send_keys(contact.bmonth)
+        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
+        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.byear)
-        wd.find_element_by_name("aday").click()
-        wd.find_element_by_name("aday").send_keys(contact.aday)
-        wd.find_element_by_name("amonth").click()
-        wd.find_element_by_name("amonth").send_keys(contact.amonth)
+        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.ayear)
@@ -128,7 +125,7 @@ class TestAddContact(unittest.TestCase):
         return True
     
     def is_alert_present(self):
-        try: self.wd.switch_to_alert()
+        try: self.wd.switch_to.alert()
         except NoAlertPresentException as e: return False
         return True
     
