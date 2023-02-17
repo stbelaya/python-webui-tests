@@ -78,4 +78,4 @@ class ContactHelper:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # submit contact creation
         wd.find_element_by_xpath("//input[@name='submit']").click()
-        self.app.return_to_home_page()
+        self.app.navigation.return_to_home_page()

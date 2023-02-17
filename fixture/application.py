@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import Select
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
+from fixture.navigation import NavigationHelper
 
 
 class Application:
@@ -12,14 +13,7 @@ class Application:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
-
-    def open_home_page(self):
-        wd = self.wd
-        wd.get("https://localhost/addressbook/")
-
-    def return_to_home_page(self):
-        wd = self.wd
-        wd.find_element_by_link_text("home page").click()
+        self.navigation = NavigationHelper(self)
 
     def destroy(self):
         self.wd.quit()
