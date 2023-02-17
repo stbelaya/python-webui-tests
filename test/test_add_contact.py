@@ -12,7 +12,7 @@ def app(request):
 
 
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.create_contact(Contact(firstname="Svetlana", middlename="Borisovna", lastname="Kovaleva",
                                     nickname="Belaya",
                                     photo="C:\\Sync\\YandexDisk\\FoldersForWindows\\Pictures\\LogoLP.jpg",
@@ -23,4 +23,4 @@ def test_add_contact(app):
                                     bmonth="October", byear="1985", aday="31", amonth="December",
                                     ayear="2023", address2="Sokolovka, 22", phone2="89002222222",
                                     notes="заметка"))
-    app.logout()
+    app.session.logout()
