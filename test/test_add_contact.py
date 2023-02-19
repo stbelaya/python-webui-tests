@@ -15,3 +15,18 @@ def test_add_contact(app):
                        ayear="2023", address2="Sokolovka, 22", phone2="89002222222",
                        notes="заметка"))
     app.session.logout()
+
+
+def test_add_empty_contact(app):
+    app.session.login(username="admin", password="secret")
+    app.contact.create(Contact(firstname="", middlename="", lastname="",
+                       nickname="",
+                       photo=None,
+                       title="", company="",
+                       address="", mobile="", home="", work="",
+                       fax="", email="", email2="",
+                       email3="", homepage="", bday=None,
+                       bmonth=None, byear="", aday=None, amonth=None,
+                       ayear="", address2="", phone2="",
+                       notes=""))
+    app.session.logout()

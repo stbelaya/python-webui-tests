@@ -55,13 +55,17 @@ class ContactHelper:
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
+        if contact.bday is not None:
+            Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
+        if contact.bmonth is not None:
+            Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.byear)
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
+        if contact.aday is not None:
+            Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+        if contact.amonth is not None:
+            Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.ayear)
