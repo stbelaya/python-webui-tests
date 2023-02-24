@@ -4,7 +4,6 @@ from model.group import Group
 
 def test_add_group(app):
     app.group.create(Group(name="sw00_01", header="sw00_head", footer="sw00_foot"))
-    app.session.logout()
 
 
 def test_add_empty_group(app):
