@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.support.ui import Select
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
