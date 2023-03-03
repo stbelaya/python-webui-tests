@@ -4,15 +4,21 @@ from model.group import Group
 
 def test_add_group(app):
     old_groups = app.group.get_group_list()
-    app.group.create(Group(name="sw00_01", header="sw00_head", footer="sw00_foot"))
+    group = Group(name="sw00_01", header="sw00_head", footer="sw00_foot")
+    app.group.create(group)
     new_groups = app.group.get_group_list()
     assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 
 def test_add_empty_group(app):
     old_groups = app.group.get_group_list()
-    app.group.create(Group(name="", header="", footer=""))
+    group = Group(name="", header="", footer="")
+    app.group.create(group)
     new_groups = app.group.get_group_list()
     assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 
