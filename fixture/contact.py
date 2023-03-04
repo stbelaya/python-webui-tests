@@ -62,11 +62,11 @@ class ContactHelper:
         self.app.navigation.return_to_home_page()
         self.contact_cache = None
 
-    def edit_first(self, contact):
+    def edit_contact_by_index(self, index, contact):
         wd = self.app.wd
         self.app.navigation.open_home_page()
         # open contact modification form
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         # update contact form
         self.fill_form(contact)
         # submit contact edition
@@ -74,16 +74,22 @@ class ContactHelper:
         self.app.navigation.return_to_home_page()
         self.contact_cache = None
 
-    def delete_first_contact(self):
+    def edit_first(self, contact):
+        self.edit_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.app.navigation.open_home_page()
         # select first contact
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
         WebDriverWait(wd, 5).until(ec.presence_of_element_located((By.CSS_SELECTOR, "div.msgbox")))
         self.contact_cache = None
+
+    def delete_first_contact(self):
+        self.delete_contact_by_index(0)
 
     def count(self):
         wd = self.app.wd
