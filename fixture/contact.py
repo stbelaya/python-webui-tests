@@ -80,8 +80,8 @@ class ContactHelper:
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
-        # WebDriverWait(wd, 5).until(ec.presence_of_element_located((By.ID, "MassCB")))
-        wd.refresh()
+        WebDriverWait(wd, 5).until(ec.presence_of_element_located((By.CSS_SELECTOR, "div.msgbox")))
+        # wd.refresh()
 
     def count(self):
         wd = self.app.wd
@@ -93,8 +93,8 @@ class ContactHelper:
         self.app.navigation.open_home_page()
         contacts = []
         for element in wd.find_elements_by_css_selector("[name=entry]"):
-            lastname = element.find_element_by_xpath("//td[2]").text
-            firstname = element.find_element_by_xpath("//td[3]").text
+            lastname = element.find_element_by_xpath("./td[2]").text
+            firstname = element.find_element_by_xpath("./td[3]").text
             id = element.find_element_by_name("selected[]").get_attribute("id")
             contacts.append(Contact(lastname=lastname, firstname=firstname, id=id))
         return contacts
