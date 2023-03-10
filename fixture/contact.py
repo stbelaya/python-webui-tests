@@ -117,10 +117,9 @@ class ContactHelper:
                 lastname = row.find_element_by_xpath("./td[2]").text
                 firstname = row.find_element_by_xpath("./td[3]").text
                 id = row.find_element_by_name("selected[]").get_attribute("id")
-                all_phones = cells[5].text.splitlines()
+                all_phones = cells[5].text
                 self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  home=all_phones[0], mobile=all_phones[1],
-                                                  work=all_phones[2], phone2=all_phones[3]))
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def get_contact_info_from_edit_page(self, index):
@@ -130,8 +129,8 @@ class ContactHelper:
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
         homephone = wd.find_element_by_name("home").get_attribute("value")
-        workphone = wd.find_element_by_name("work").get_attribute("value")
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
+        workphone = wd.find_element_by_name("work").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone,
                        mobile=mobilephone, work=workphone, phone2=secondaryphone)
@@ -144,8 +143,8 @@ class ContactHelper:
         lastname = wd.find_element_by_tag_name("b").text.split(" ")[-1]
         id = wd.find_element_by_name("id").get_attribute("value")
         homephone = re.search("H: (.*)", text).group(1)
-        workphone = re.search("W: (.*)", text).group(1)
         mobilephone = re.search("M: (.*)", text).group(1)
+        workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone,
                        mobile=mobilephone, work=workphone, phone2=secondaryphone)
