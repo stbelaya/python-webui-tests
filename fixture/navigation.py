@@ -6,16 +6,21 @@ class NavigationHelper:
     def __init__(self, app):
         self.app = app
 
+    home_page = "https://localhost/addressbook/"
+    groups_page = "/group.php"
+
     def open_home_page(self):
         wd = self.app.wd
-        if self.is_on_page("localhost/addressbook/", "searchstring") is False or ec.alert_is_present() is True:
-            wd.get("https://localhost/addressbook/")
+        home_page = self.home_page
+        if self.is_on_page(home_page, "searchstring") is False or ec.alert_is_present() is True:
+            wd.get(home_page)
 
     def return_to_home_page(self):
         wd = self.app.wd
+        home_page = self.home_page
         if ec.alert_is_present() is True:
             wd.switch_to.alert.dismiss()
-        elif self.is_on_page("localhost/addressbook/", "searchstring") is False:
+        elif self.is_on_page(home_page, "searchstring") is False:
             wd.find_element_by_link_text("home page").click()
 
     def is_on_page(self, url, element):
@@ -24,10 +29,12 @@ class NavigationHelper:
 
     def open_groups_page(self):
         wd = self.app.wd
-        if self.is_on_page("/group.php", "new") is False:
+        groups_page = self.groups_page
+        if self.is_on_page(groups_page, "new") is False:
             wd.find_element_by_link_text("groups").click()
 
     def return_to_groups_page(self):
         wd = self.app.wd
-        if self.is_on_page("/group.php", "new") is False:
+        groups_page = self.groups_page
+        if self.is_on_page(groups_page, "new") is False:
             wd.find_element_by_link_text("group page").click()
