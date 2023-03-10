@@ -149,3 +149,13 @@ class ContactHelper:
         return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone,
                        mobile=mobilephone, work=workphone, phone2=secondaryphone)
 
+
+def merge_phones_like_on_home_page(contact):
+    return "\n".join(filter(lambda x: x != "",
+                            map(lambda x: clear_phone(x),
+                                filter(lambda x: x is not None,
+                                       [contact.home, contact.mobile, contact.work, contact.phone2]))))
+
+
+def clear_phone(s):
+    return re.sub("[() -]", "", s)
