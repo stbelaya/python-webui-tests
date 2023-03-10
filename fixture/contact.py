@@ -117,9 +117,12 @@ class ContactHelper:
                 lastname = row.find_element_by_xpath("./td[2]").text
                 firstname = row.find_element_by_xpath("./td[3]").text
                 id = row.find_element_by_name("selected[]").get_attribute("id")
+                address = cells[3].text
+                all_emails = cells[4].text
                 all_phones = cells[5].text
                 self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  all_phones_from_home_page=all_phones))
+                                                  all_phones_from_home_page=all_phones, address=address,
+                                                  all_emails_from_home_page=all_emails))
         return list(self.contact_cache)
 
     def get_contact_info_from_edit_page(self, index):
@@ -132,8 +135,13 @@ class ContactHelper:
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
+        address = wd.find_element_by_name("address").text
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone,
-                       mobile=mobilephone, work=workphone, phone2=secondaryphone)
+                       mobile=mobilephone, work=workphone, phone2=secondaryphone, address=address,
+                       email=email, email2=email2, email3=email3)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
@@ -159,3 +167,8 @@ def merge_phones_like_on_home_page(contact):
 
 def clear_phone(s):
     return re.sub("[() -]", "", s)
+
+
+def merge_emails_like_on_home_page(contact):
+    return "\n".join(filter(lambda x: x is not None and x != "",
+                            [contact.email, contact.email2, contact.email3]))
