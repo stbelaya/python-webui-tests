@@ -1,4 +1,5 @@
 from selenium.webdriver.support.ui import Select
+from fixture.generation_helper import clear_spaces
 from model.contact import Contact
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -171,4 +172,21 @@ def clear_phone(s):
 
 def merge_emails_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x is not None and x != "",
-                            [contact.email, contact.email2, contact.email3]))
+                            [clear_spaces(contact.email), clear_spaces(contact.email2), clear_spaces(contact.email3)]))
+
+
+def clear_contact(contact):
+    _ = clear_spaces
+    return Contact(firstname=_(contact.firstname), middlename=contact.middlename,
+                   lastname=_(contact.lastname), nickname=contact.nickname,
+                   title=contact.title, company=contact.company,
+                   address=_(contact.address), mobile=_(contact.mobile),
+                   home=_(contact.home), work=_(contact.work),
+                   fax=_(contact.fax), email=_(contact.email),
+                   email2=_(contact.email2), email3=_(contact.email3),
+                   homepage=contact.homepage, bday=contact.bday, bmonth=contact.bmonth,
+                   byear=contact.byear, aday=contact.aday, amonth=contact.amonth, ayear=contact.ayear,
+                   address2=contact.address2, phone2=_(contact.phone2),
+                   notes=contact.notes,
+                   all_emails_from_home_page=merge_emails_like_on_home_page(contact),
+                   all_phones_from_home_page=merge_phones_like_on_home_page(contact))
