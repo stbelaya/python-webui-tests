@@ -1,5 +1,6 @@
 import random
 import string
+import re
 
 
 def random_string(prefix, maxlen):
@@ -13,4 +14,4 @@ def random_text(prefix, maxlen, maxrows):
 
 
 def clear_spaces(s):
-    return " ".join(s.split()) if s is not None else ""
+    return re.sub(" +", " ", re.sub(" \n", "\n", re.sub("\n ", "\n", s))).strip() if s is not None else ""
