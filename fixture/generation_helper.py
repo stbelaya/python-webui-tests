@@ -14,4 +14,8 @@ def random_text(prefix, maxlen, maxrows):
 
 
 def clear_spaces(s):
+    return " ".join(s.split()) if s is not None else ""
+
+
+def clear_spaces_textarea(s):
     return re.sub(" +", " ", re.sub(" \n", "\n", re.sub("\n ", "\n", s))).strip() if s is not None else ""
