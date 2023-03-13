@@ -3,11 +3,10 @@ from selenium.webdriver.support import expected_conditions as ec
 
 class NavigationHelper:
 
-    def __init__(self, app):
+    def __init__(self, app, base_url):
         self.app = app
-
-    home_page = "https://localhost/addressbook/"
-    groups_page = "/group.php"
+        self.home_page = base_url
+        self.groups_page = "/group.php"
 
     def open_home_page(self):
         wd = self.app.wd
