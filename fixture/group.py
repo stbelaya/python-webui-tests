@@ -1,4 +1,4 @@
-from fixture.generation_helper import clear_spaces
+from data.generation_helper import clear_spaces
 from model.group import Group
 
 

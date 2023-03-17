@@ -2,13 +2,8 @@
 from fixture.group import clear_group
 from model.group import Group
 import pytest
-from fixture.generation_helper import random_string, random_text
-
-
-testdata = [Group(name="", header="", footer="")] + [
-    Group(name=random_string("name", 10), header=random_text("header", 20, 5), footer=random_text("footer", 20, 5))
-    for i in range(5)
-]
+from data.add_group import testdata
+# from data.add_group import constant as testdata
 
 
 @pytest.mark.parametrize("group", testdata, ids=[repr(x) for x in testdata])

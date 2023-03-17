@@ -1,5 +1,5 @@
 from random import randrange
-from fixture.generation_helper import random_string, random_text, clear_spaces
+from data.generation_helper import random_string, clear_spaces
 from model.contact import Contact
 from fixture.contact import merge_emails_like_on_home_page, merge_phones_like_on_home_page
 

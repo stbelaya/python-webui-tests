@@ -1,5 +1,5 @@
 from selenium.webdriver.support.ui import Select
-from fixture.generation_helper import clear_spaces, clear_spaces_textarea
+from data.generation_helper import clear_spaces, clear_spaces_textarea
 from model.contact import Contact
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
