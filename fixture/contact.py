@@ -167,7 +167,7 @@ def merge_phones_like_on_home_page(contact):
 
 
 def clear_phone(s):
-    return re.sub("[.() %-]", "", s)
+    return re.sub("[.() -]", "", s)
 
 
 def merge_emails_like_on_home_page(contact):
