@@ -29,6 +29,7 @@ constant = [
 ]
 
 testdata = [Group(name="", header="", footer="")] + [
+    Group(name=" ", header=" ", footer=" ")] + [
     Group(name=random_string("name", 10), header=random_text("header", 20, 5), footer=random_text("footer", 20, 5))
     for i in range(n)
 ]
