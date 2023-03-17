@@ -1,4 +1,4 @@
-from data.generation_helper import clear_spaces
+from generator.generation_helper import clear_spaces
 from model.group import Group
 
 

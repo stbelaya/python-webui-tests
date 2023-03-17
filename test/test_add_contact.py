@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from data.generation_helper import random_string, random_text
+from generator.generation_helper import random_string, random_text
 from model.contact import Contact
 import pytest
 import random

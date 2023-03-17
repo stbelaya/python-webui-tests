@@ -2,7 +2,7 @@
 import os.path
 import json
 from model.group import Group
-from data.generation_helper import random_string, random_text
+from generator.generation_helper import random_string, random_text
 import getopt
 import sys
 
