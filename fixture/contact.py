@@ -188,6 +188,6 @@ def clear_contact(contact):
                    homepage=contact.homepage, bday=contact.bday, bmonth=contact.bmonth,
                    byear=contact.byear, aday=contact.aday, amonth=contact.amonth, ayear=contact.ayear,
                    address2=contact.address2, phone2=_(contact.phone2),
-                   notes=contact.notes,
+                   notes=contact.notes, id=contact.id,
                    all_emails_from_home_page=merge_emails_like_on_home_page(contact),
                    all_phones_from_home_page=merge_phones_like_on_home_page(contact))

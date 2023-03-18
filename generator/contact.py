@@ -36,8 +36,10 @@ constant = [
        ]
 
 testdata = [
-            Contact(firstname="", middlename="", lastname="")] + [
-            Contact(firstname=" ", middlename=" ", lastname=" ")] + [
+            Contact(firstname="", middlename="", lastname="", address="", email="", email2="",
+                    email3="", mobile="", home="", work="", phone2="")] + [
+            Contact(firstname=" ", middlename=" ", lastname=" ", address=" ", email=" ", email2=" ",
+                    email3=" ", mobile=" ", home=" ", work=" ", phone2=" ")] + [
             Contact(firstname=random_string("name", 20), middlename=random_string("middle", 20),
                     lastname=random_string("lastname", 20), nickname=random_string("nick", 20),
                     title=random_string("title", 25), company=random_string("company", 30),
