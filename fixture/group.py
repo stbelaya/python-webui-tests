@@ -103,5 +103,5 @@ class GroupHelper:
 
 def clear_group(group):
     _ = clear_spaces
-    return Group(name=_(group.name), header=_(group.header), footer=_(group.footer))
+    return Group(id=group.id, name=_(group.name), header=_(group.header), footer=_(group.footer))
 
