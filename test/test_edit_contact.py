@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
-from generator.generation_helper import clear_spaces
+import random
 from model.contact import Contact
-from random import randrange
 from fixture.contact import merge_emails_like_on_home_page, merge_phones_like_on_home_page, clear_contact
+from fixture.processing import propagate
 
 
-def test_edit_some_contact(app, json_contacts):
-    if app.contact.count() == 0:
+def test_edit_some_contact(app, json_contacts, db, check_ui):
+    if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(firstname="test"))
-    old_contacts = app.contact.get_contact_list()
-    index = randrange(len(old_contacts))
-    contact = json_contacts
-    contact.all_emails_from_home_page = merge_emails_like_on_home_page(contact)
-    contact.all_phones_from_home_page = merge_phones_like_on_home_page(contact)
-    contact.id = old_contacts[index].id
-    app.contact.edit_contact_by_index(index, contact)
-    assert len(old_contacts) == app.contact.count()
-    new_contacts = app.contact.get_contact_list()
-    old_contacts[index] = clear_contact(contact)
+    old_contacts = db.get_contact_list()
+    contact = random.choice(old_contacts)
+    new_contact = json_contacts
+    new_contact.id = contact.id
+    app.contact.edit_contact_by_id(contact.id, new_contact)
+    new_contacts = db.get_contact_list()
+    old_contacts.remove(contact)
+    old_contacts.append(propagate(contact, new_contact))
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(map(clear_contact, new_contacts), key=Contact.id_or_max) \
+               == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
 
