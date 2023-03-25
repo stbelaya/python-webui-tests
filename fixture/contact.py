@@ -166,7 +166,7 @@ class ContactHelper:
         email = wd.find_element(By.NAME, "email").get_attribute("value")
         email2 = wd.find_element(By.NAME, "email2").get_attribute("value")
         email3 = wd.find_element(By.NAME, "email3").get_attribute("value")
-        return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone,
+        return Contact(id=id, firstname=firstname, lastname=lastname, home=homephone,
                        mobile=mobilephone, work=workphone, phone2=secondaryphone, address=address,
                        email=email, email2=email2, email3=email3)
 

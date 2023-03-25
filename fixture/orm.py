@@ -39,10 +39,10 @@ class ORMFixture:
 
     def convert_contacts_to_models(self, contacts):
         def convert(contact):
-            return Contact(Contact(id=str(contact.id), firstname=contact.firstname, lastname=contact.lastname,
+            return Contact(id=str(contact.id), firstname=contact.firstname, lastname=contact.lastname,
                                    address=contact.address, mobile=contact.mobile, home=contact.home,
                                    work=contact.work, phone2=contact.phone2, email=contact.email,
-                                   email2=contact.email2, email3=contact.email3))
+                                   email2=contact.email2, email3=contact.email3)
         return list(map(convert, contacts))
 
     def __init__(self, host, name, user, password):

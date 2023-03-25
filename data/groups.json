@@ -1,51 +1,9 @@
 [
   {
     "py/object": "model.group.Group",
-    "name": "",
-    "header": "",
-    "footer": "",
-    "id": null
-  },
-  {
-    "py/object": "model.group.Group",
-    "name": " ",
-    "header": " ",
-    "footer": " ",
-    "id": null
-  },
-  {
-    "py/object": "model.group.Group",
-    "name": "namewl",
-    "header": "header|DR`EVnfHk y",
-    "footer": "footerYhMP]5k&T1 ",
-    "id": null
-  },
-  {
-    "py/object": "model.group.Group",
-    "name": "name;d",
-    "header": "header",
-    "footer": "footer=@!",
-    "id": null
-  },
-  {
-    "py/object": "model.group.Group",
-    "name": "nameS@3 ei-6",
-    "header": "headerY^]YV\n.Gc &Qc,9",
-    "footer": "footer9#>Z+/e",
-    "id": null
-  },
-  {
-    "py/object": "model.group.Group",
-    "name": "name\" \"v",
-    "header": "header-@W*l3",
-    "footer": "footern,m% 8> NI)o2 JG?I",
-    "id": null
-  },
-  {
-    "py/object": "model.group.Group",
-    "name": "name9Dwq",
-    "header": "header =E*BF\n^W",
-    "footer": "footerHjVuH&3]\n[.:G",
+    "name": null,
+    "header": "Vally",
+    "footer": null,
     "id": null
   }
 ]
