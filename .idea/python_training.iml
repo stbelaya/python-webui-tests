@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/test/.pytest_cache" />
       <excludeFolder url="file://$MODULE_DIR$/.pytest_cache" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (python_training)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="downgrade" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

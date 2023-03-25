@@ -1,4 +1,5 @@
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.common.by import By
 
 
 class NavigationHelper:
@@ -20,20 +21,20 @@ class NavigationHelper:
         if ec.alert_is_present() is True:
             wd.switch_to.alert.dismiss()
         elif self.is_on_page(home_page, "searchstring") is False:
-            wd.find_element_by_link_text("home page").click()
+            wd.find_element(By.LINK_TEXT, "home page").click()
 
     def is_on_page(self, url, element):
         wd = self.app.wd
-        return wd.current_url.endswith(url) and len(wd.find_elements_by_name(element)) > 0
+        return wd.current_url.endswith(url) and len(wd.find_elements(By.NAME, element)) > 0
 
     def open_groups_page(self):
         wd = self.app.wd
         groups_page = self.groups_page
         if self.is_on_page(groups_page, "new") is False:
-            wd.find_element_by_link_text("groups").click()
+            wd.find_element(By.LINK_TEXT, "groups").click()
 
     def return_to_groups_page(self):
         wd = self.app.wd
         groups_page = self.groups_page
         if self.is_on_page(groups_page, "new") is False:
-            wd.find_element_by_link_text("group page").click()
+            wd.find_element(By.LINK_TEXT, "group page").click()

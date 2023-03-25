@@ -44,23 +44,23 @@ class ContactHelper:
     def change_dropdown_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
-            Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
+            Select(wd.find_element(By.NAME, field_name)).select_by_visible_text(text)
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
-            wd.find_element_by_name(field_name).click()
-            wd.find_element_by_name(field_name).clear()
-            wd.find_element_by_name(field_name).send_keys(text)
+            wd.find_element(By.NAME, field_name).click()
+            wd.find_element(By.NAME, field_name).clear()
+            wd.find_element(By.NAME, field_name).send_keys(text)
 
     def create(self, contact):
         wd = self.app.wd
         # init contact creation
-        wd.find_element_by_link_text("add new").click()
+        wd.find_element(By.LINK_TEXT, "add new").click()
         # fill contact form
         self.fill_form(contact)
         # submit contact creation
-        wd.find_element_by_xpath("//input[@name='submit']").click()
+        wd.find_element(By.CSS_SELECTOR, "input[name='submit']").click()
         self.app.navigation.return_to_home_page()
         self.contact_cache = None
 
@@ -70,19 +70,19 @@ class ContactHelper:
         # update contact form
         self.fill_form(contact)
         # submit contact edition
-        wd.find_element_by_name("update").click()
+        wd.find_element(By.NAME, "update").click()
         self.app.navigation.return_to_home_page()
         self.contact_cache = None
 
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
         self.app.navigation.open_home_page()
-        wd.find_elements(By.CSS_SELECTOR, f"img[alt='Edit']")[index].click()
+        wd.find_elements(By.CSS_SELECTOR, "img[alt='Edit']")[index].click()
 
     def open_contact_view_by_index(self, index):
         wd = self.app.wd
         self.app.navigation.open_home_page()
-        wd.find_elements(By.CSS_SELECTOR, f"img[alt='Details']")[index].click()
+        wd.find_elements(By.CSS_SELECTOR, "img[alt='Details']")[index].click()
 
     def edit_first(self, contact):
         self.edit_contact_by_index(0)
@@ -93,7 +93,7 @@ class ContactHelper:
         # select first contact
         wd.find_elements(By.NAME, "selected[]")[index].click()
         # submit deletion
-        wd.find_element(By.CSS_SELECTOR, f"input[value='Delete']").click()
+        wd.find_element(By.CSS_SELECTOR, "input[value='Delete']").click()
         wd.switch_to.alert.accept()
         WebDriverWait(wd, 5).until(ec.presence_of_element_located((By.CSS_SELECTOR, "div.msgbox")))
         self.contact_cache = None
@@ -104,7 +104,7 @@ class ContactHelper:
         # select first contact
         wd.find_element(By.CSS_SELECTOR, f"input[value='{id}']").click()
         # submit deletion
-        wd.find_element(By.CSS_SELECTOR, f"input[value='Delete']").click()
+        wd.find_element(By.CSS_SELECTOR, "input[value='Delete']").click()
         wd.switch_to.alert.accept()
         WebDriverWait(wd, 5).until(ec.presence_of_element_located((By.CSS_SELECTOR, "div.msgbox")))
         self.contact_cache = None

@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from generator.generation_helper import clear_spaces
 from model.group import Group
 
@@ -16,19 +17,19 @@ class GroupHelper:
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
-            wd.find_element_by_name(field_name).click()
-            wd.find_element_by_name(field_name).clear()
-            wd.find_element_by_name(field_name).send_keys(text)
+            wd.find_element(By.NAME, field_name).click()
+            wd.find_element(By.NAME, field_name).clear()
+            wd.find_element(By.NAME, field_name).send_keys(text)
 
     def create(self, group):
         wd = self.app.wd
         self.app.navigation.open_groups_page()
         # init group creation
-        wd.find_element_by_name("new").click()
+        wd.find_element(By.NAME, "new").click()
         # fill group form
         self.fill_form(group)
         # submit group creation
-        wd.find_element_by_name("submit").click()
+        wd.find_element(By.NAME, "submit").click()
         self.app.navigation.return_to_groups_page()
         self.group_cache = None
 
@@ -40,7 +41,7 @@ class GroupHelper:
         self.app.navigation.open_groups_page()
         self.select_group_by_index(index)
         # submit deletion
-        wd.find_element_by_name("delete").click()
+        wd.find_element(By.NAME, "delete").click()
         self.app.navigation.return_to_groups_page()
         self.group_cache = None
 
@@ -49,7 +50,7 @@ class GroupHelper:
         self.app.navigation.open_groups_page()
         self.select_group_by_id(id)
         # submit deletion
-        wd.find_element_by_name("delete").click()
+        wd.find_element(By.NAME, "delete").click()
         self.app.navigation.return_to_groups_page()
         self.group_cache = None
 
@@ -61,30 +62,30 @@ class GroupHelper:
         self.app.navigation.open_groups_page()
         self.select_group_by_index(index)
         # submit edition
-        wd.find_element_by_name("edit").click()
+        wd.find_element(By.NAME, "edit").click()
         # update group form
         self.fill_form(group)
         # submit group creation
-        wd.find_element_by_name("update").click()
+        wd.find_element(By.NAME, "update").click()
         self.app.navigation.return_to_groups_page()
         self.group_cache = None
 
     def select_first_group(self):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.find_element(By.NAME, "selected[]").click()
 
     def select_group_by_index(self, index):
         wd = self.app.wd
-        wd.find_elements_by_name("selected[]")[index].click()
+        wd.find_elements(By.NAME, "selected[]")[index].click()
 
     def select_group_by_id(self, id):
         wd = self.app.wd
-        wd.find_element_by_css_selector(f"input[value='{id}']").click()
+        wd.find_element(By.CSS_SELECTOR, f"input[value='{id}']").click()
 
     def count(self):
         wd = self.app.wd
         self.app.navigation.open_groups_page()
-        return len(wd.find_elements_by_name("selected[]"))
+        return len(wd.find_elements(By.NAME, "selected[]"))
 
     group_cache = None
 
@@ -93,9 +94,9 @@ class GroupHelper:
             wd = self.app.wd
             self.app.navigation.open_groups_page()
             self.group_cache = []
-            for element in wd.find_elements_by_css_selector("span.group"):
+            for element in wd.find_elements(By.CSS_SELECTOR, "span.group"):
                 text = element.text
-                id = element.find_element_by_name("selected[]").get_attribute("value")
+                id = element.find_element(By.NAME, "selected[]").get_attribute("value")
                 self.group_cache.append(Group(name=text, id=id))
 
         return list(self.group_cache)
