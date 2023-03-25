@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 from fixture.group import clear_group
+from fixture.processing import propagate
 from model.group import Group
 
 
@@ -14,7 +15,7 @@ def test_edit_some_group(app, json_groups, db, check_ui):
     app.group.edit_group_by_id(group.id, new_group)
     new_groups = db.get_group_list()
     old_groups.remove(group)
-    old_groups.append(new_group)
+    old_groups.append(propagate(group, new_group))
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
         assert sorted(map(clear_group, new_groups), key=Group.id_or_max) == \
