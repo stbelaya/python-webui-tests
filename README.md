@@ -1,6 +1,6 @@
-# Repository for python training lecture
+# Addressbook autotests
 ## Описание
-Добро пожаловать в мой проект курса sofrware-testing.ru по автоматизированному тестированию на Python.
+Добро пожаловать в мой проект курса software-testing.ru по автоматизированному тестированию на Python.
 Проект тестирует веб-приложение "Addressbook": https://sourceforge.net/projects/php-addressbook/
 ## Что использовано
 - Pytest
