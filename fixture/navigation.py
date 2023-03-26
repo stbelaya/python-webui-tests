@@ -8,6 +8,7 @@ class NavigationHelper:
         self.app = app
         self.home_page = base_url
         self.groups_page = "/group.php"
+        self.group_page = "/?group="
 
     def open_home_page(self):
         wd = self.app.wd
@@ -38,3 +39,9 @@ class NavigationHelper:
         groups_page = self.groups_page
         if self.is_on_page(groups_page, "new") is False:
             wd.find_element(By.LINK_TEXT, "group page").click()
+
+    def go_to_group_page(self, id):
+        wd = self.app.wd
+        group_page = self.group_page + id
+        if self.is_on_page(group_page, "group") is False:
+            wd.find_element(By.PARTIAL_LINK_TEXT, "group page").click()

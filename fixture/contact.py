@@ -191,8 +191,18 @@ class ContactHelper:
     def add_contact_to_group(self, contact_id, group_id):
         wd = self.app.wd
         self.app.navigation.open_home_page()
-        # select contact with id
         self.select_contact_by_id(contact_id)
         # choose group to add
         Select(wd.find_element(By.NAME, "to_group")).select_by_value(f"{group_id}")
         wd.find_element(By.CSS_SELECTOR, f"input[value='Add to']").click()
+        self.app.navigation.go_to_group_page(group_id)
+
+    def remove_contact_from_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.app.navigation.open_home_page()
+        # open group with id
+        Select(wd.find_element(By.NAME, "group")).select_by_value(f"{group_id}")
+        self.select_contact_by_id(contact_id)
+        # press Remove button
+        wd.find_element(By.NAME, "remove").click()
+        self.app.navigation.go_to_group_page(group_id)
