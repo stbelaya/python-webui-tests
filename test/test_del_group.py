@@ -1,6 +1,6 @@
 import random
 from model.group import Group
-from fixture.group import clear_group
+from fixture.processing import clear_group
 
 
 def test_delete_some_group(app, db, check_ui):

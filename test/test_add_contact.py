@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
-from fixture.contact import clear_contact
+from fixture.processing import clear_contact, clear_contact_to_db
 
 
 def test_add_contact(app, json_contacts, db, check_ui):
@@ -8,7 +8,7 @@ def test_add_contact(app, json_contacts, db, check_ui):
     old_contacts = db.get_contact_list()
     app.contact.create(contact)
     new_contacts = db.get_contact_list()
-    old_contacts.append(contact)
+    old_contacts.append(clear_contact_to_db(contact))
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
     if check_ui:
         assert sorted(map(clear_contact, new_contacts), key=Contact.id_or_max) == \

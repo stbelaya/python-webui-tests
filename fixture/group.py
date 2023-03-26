@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from generator.generation_helper import clear_spaces
 from model.group import Group
 
 
@@ -113,9 +112,3 @@ class GroupHelper:
                 self.group_cache.append(Group(name=text, id=id))
 
         return list(self.group_cache)
-
-
-def clear_group(group):
-    _ = clear_spaces
-    return Group(id=group.id, name=_(group.name), header=_(group.header), footer=_(group.footer))
-

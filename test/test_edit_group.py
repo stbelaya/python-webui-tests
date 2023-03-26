@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
-from fixture.group import clear_group
-from fixture.processing import propagate
+from fixture.processing import propagate, clear_group
 from model.group import Group
 
 

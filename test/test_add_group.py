@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from fixture.group import clear_group
+from fixture.processing import clear_group, clear_group_to_db
 from model.group import Group
 
 
@@ -8,7 +8,7 @@ def test_add_group(app, db, json_groups, check_ui):
     old_groups = db.get_group_list()
     app.group.create(group)
     new_groups = db.get_group_list()
-    old_groups.append(group)
+    old_groups.append(clear_group_to_db(group))
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
         assert sorted(map(clear_group, new_groups), key=Group.id_or_max) == \

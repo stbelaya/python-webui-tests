@@ -1,5 +1,5 @@
 import re
-from fixture.contact import merge_phones_like_on_home_page
+from fixture.processing import merge_phones_like_on_home_page
 
 
 def test_phones_on_home_page(app):

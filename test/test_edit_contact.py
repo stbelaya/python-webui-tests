@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 from model.contact import Contact
-from fixture.contact import merge_emails_like_on_home_page, merge_phones_like_on_home_page, clear_contact
-from fixture.processing import propagate
+from fixture.processing import propagate, clear_contact
 
 
 def test_edit_some_contact(app, json_contacts, db, check_ui):

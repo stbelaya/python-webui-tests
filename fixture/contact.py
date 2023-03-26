@@ -1,5 +1,5 @@
 from selenium.webdriver.support.ui import Select
-from generator.generation_helper import clear_spaces, clear_spaces_textarea
+
 from model.contact import Contact
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -184,36 +184,15 @@ class ContactHelper:
         return Contact(firstname=firstname, lastname=lastname, id=id, home=homephone,
                        mobile=mobilephone, work=workphone, phone2=secondaryphone)
 
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element(By.CSS_SELECTOR, f"input[value='{id}']").click()
 
-def merge_phones_like_on_home_page(contact):
-    return "\n".join(filter(lambda x: x != "",
-                            map(lambda x: clear_phone(x),
-                                filter(lambda x: x is not None,
-                                       [contact.home, contact.mobile, contact.work, contact.phone2]))))
-
-
-def clear_phone(s):
-    return re.sub("[/.() -]", "", s)
-
-
-def merge_emails_like_on_home_page(contact):
-    return "\n".join(filter(lambda x: x is not None and x != "",
-                            [clear_spaces(contact.email), clear_spaces(contact.email2), clear_spaces(contact.email3)]))
-
-
-def clear_contact(contact):
-    _ = clear_spaces
-    __ = clear_spaces_textarea
-    return Contact(firstname=_(contact.firstname), middlename=contact.middlename,
-                   lastname=_(contact.lastname), nickname=contact.nickname,
-                   title=contact.title, company=contact.company,
-                   address=__(contact.address), mobile=_(contact.mobile),
-                   home=_(contact.home), work=_(contact.work),
-                   fax=_(contact.fax), email=_(contact.email),
-                   email2=_(contact.email2), email3=_(contact.email3),
-                   homepage=contact.homepage, bday=contact.bday, bmonth=contact.bmonth,
-                   byear=contact.byear, aday=contact.aday, amonth=contact.amonth, ayear=contact.ayear,
-                   address2=contact.address2, phone2=_(contact.phone2),
-                   notes=contact.notes, id=contact.id,
-                   all_emails_from_home_page=merge_emails_like_on_home_page(contact),
-                   all_phones_from_home_page=merge_phones_like_on_home_page(contact))
+    def add_contact_to_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.app.navigation.open_home_page()
+        # select contact with id
+        self.select_contact_by_id(contact_id)
+        # choose group to add
+        Select(wd.find_element(By.NAME, "to_group")).select_by_value(f"{group_id}")
+        wd.find_element(By.CSS_SELECTOR, f"input[value='Add to']").click()
