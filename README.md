@@ -5,6 +5,7 @@
 ## Что использовано
 - Pytest
 - Selenium WebDriver
+- Parameter Object pattern
 - MySQL ORM
 - Data Driven Testing
 ## Фото кошки Ламарр
