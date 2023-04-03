@@ -19,7 +19,7 @@ class ContactHelper:
         self.change_field_value("lastname", contact.lastname)
         self.change_field_value("nickname", contact.nickname)
         if contact.photo is not None:
-            wd.find_element_by_name("photo").send_keys(contact.photo)
+            wd.find_element(By.NAME, "photo").send_keys(contact.photo)
         self.change_field_value("title", contact.title)
         self.change_field_value("company", contact.company)
         self.change_field_value("address", contact.address)

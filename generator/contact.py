@@ -14,6 +14,8 @@ except getopt.GetoptError as err:
 
 n = 5
 f = "data/contacts.json"
+photo = "data\\LogoLP.jpg"
+path = os.path.dirname(os.path.abspath(__file__))
 
 for o, a in opts:
     if o == "-n":
@@ -43,6 +45,7 @@ testdata = [
             Contact(firstname=random_string("name", 20), middlename=random_string("middle", 20),
                     lastname=random_string("lastname", 20), nickname=random_string("nick", 20),
                     title=random_string("title", 25), company=random_string("company", 30),
+                    photo=os.path.join(path, "..", photo),
                     address=random_text("address", 50, 10), mobile=random_string("mobile", 11),
                     home=random_string("home", 11), work=random_string("work", 11),
                     fax=random_string("fax", 20), email=random_string("email", 20),
@@ -54,7 +57,7 @@ testdata = [
             for i in range(n)
 ]
 
-file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
+file = os.path.join(path, "..", f)
 
 with open(file, "w") as out:
     jsonpickle.set_encoder_options("json", indent=2)
