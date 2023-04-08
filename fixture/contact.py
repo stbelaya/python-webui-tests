@@ -1,10 +1,10 @@
 from selenium.webdriver.support.ui import Select
-
-from model.contact import Contact
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 import re
+
+from model.contact import Contact
 
 
 class ContactHelper:
