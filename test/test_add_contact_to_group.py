@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
+
 from model.contact import Contact
 from fixture.processing import clear_contact_to_db
 from model.group import Group

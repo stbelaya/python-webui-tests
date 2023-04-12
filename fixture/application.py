@@ -16,7 +16,7 @@ class Application:
         elif browser == "edge":
             self.wd = webdriver.Edge()
         else:
-            raise ValueError("Unrecognized browser %s" % browser)
+            raise ValueError(f"Unrecognized browser {browser}")
         self.wd.implicitly_wait(2)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)

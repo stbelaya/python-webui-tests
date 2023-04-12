@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
+
 from model.contact import Contact
 from fixture.processing import propagate, clear_contact
 

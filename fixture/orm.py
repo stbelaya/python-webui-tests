@@ -5,7 +5,6 @@ from model.contact import Contact
 
 
 class ORMFixture:
-
     db = Database()
 
     class ORMGroup(db.Entity):
@@ -14,7 +13,8 @@ class ORMFixture:
         name = Optional(str, column="group_name")
         header = Optional(str, column="group_header")
         footer = Optional(str, column="group_footer")
-        contacts = Set(lambda: ORMFixture.ORMContact, table="address_in_groups", column="id", reverse="groups", lazy=True)
+        contacts = Set(lambda: ORMFixture.ORMContact, table="address_in_groups",
+                       column="id", reverse="groups", lazy=True)
 
     class ORMContact(db.Entity):
         _table_ = "addressbook"
@@ -30,19 +30,21 @@ class ORMFixture:
         email2 = Optional(str, column="email2")
         email3 = Optional(str, column="email3")
         deprecated = Optional(datetime, column="deprecated")
-        groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups", column="group_id", reverse="contacts", lazy=True)
+        groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups",
+                     column="group_id", reverse="contacts", lazy=True)
 
     def convert_groups_to_models(self, groups):
         def convert(group):
             return Group(id=str(group.id), name=group.name, header=group.header, footer=group.footer)
+
         return list(map(convert, groups))
 
     def convert_contacts_to_models(self, contacts):
         def convert(contact):
             return Contact(id=str(contact.id), firstname=contact.firstname, lastname=contact.lastname,
-                                   address=contact.address, mobile=contact.mobile, home=contact.home,
-                                   work=contact.work, phone2=contact.phone2, email=contact.email,
-                                   email2=contact.email2, email3=contact.email3)
+                           address=contact.address, mobile=contact.mobile, home=contact.home,
+                           work=contact.work, phone2=contact.phone2, email=contact.email,
+                           email2=contact.email2, email3=contact.email3)
         return list(map(convert, contacts))
 
     def __init__(self, host, name, user, password):
@@ -72,4 +74,3 @@ class ORMFixture:
         orm_group = self.select_group_by_id(group)
         return self.convert_contacts_to_models(
             select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group not in c.groups))
-

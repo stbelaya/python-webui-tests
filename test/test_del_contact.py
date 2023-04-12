@@ -1,4 +1,5 @@
 import random
+
 from fixture.processing import clear_contact
 from model.contact import Contact
 

@@ -1,5 +1,3 @@
-Package           Version
------------------ ---------
 pymysql~=1.0.2
 pony~=0.7.16
 selenium~=4.8.3

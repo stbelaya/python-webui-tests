@@ -1,4 +1,5 @@
 import random
+
 from model.group import Group
 from fixture.processing import clear_group
 
