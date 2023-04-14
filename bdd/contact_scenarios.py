@@ -11,3 +11,8 @@ def test_add_new_contact():
 @scenario("contacts.feature", "Delete a contact")
 def test_delete_contact():
     pass
+
+
+@scenario("contacts.feature", "Edit a contact")
+def test_edit_contact():
+    pass

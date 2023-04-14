@@ -59,3 +59,22 @@ def verify_contact_deleted(app, db, non_empty_contact_list, random_contact, chec
     if check_ui:
         assert sorted(map(clear_contact, new_contacts), key=Contact.id_or_max) \
                == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+
+
+@when("I edit the contact from the list according to given contact")
+def edit_contact(app, random_contact, new_contact):
+    app.contact.edit_contact_by_id(random_contact.id, new_contact)
+
+
+@then("the new contact list is equal to the old list with the edited contact")
+def verify_contact_edited(app, db, non_empty_contact_list, random_contact, new_contact, check_ui):
+    old_contacts = non_empty_contact_list
+    new_contacts = db.get_contact_list()
+    old_contacts.remove(random_contact)
+    old_contacts.append(propagate(random_contact, new_contact))
+    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+    a = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+    b = sorted(map(clear_contact, new_contacts), key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(map(clear_contact, new_contacts), key=Contact.id_or_max) \
+               == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
