@@ -33,7 +33,7 @@ def verify_group_added(db, group_list, new_group, app, check_ui):
 
 @given("a non-empty group list", target_fixture="non_empty_group_list")
 def non_empty_group_list(db, app):
-    if len(db.get_group_list()) == 0:
+    if not db.get_group_list():
         app.group.create(Group(name="some name"))
     return db.get_group_list()
 

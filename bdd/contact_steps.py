@@ -1,4 +1,5 @@
 from pytest_bdd import given, when, then, parsers
+import random
 
 from fixture.processing import clear_contact, clear_contact_to_db, propagate
 from model.contact import Contact
@@ -29,3 +30,32 @@ def verify_contact_added(app, db, contact_list, new_contact, check_ui):
     if check_ui:
         assert sorted(map(clear_contact, new_contacts), key=Contact.id_or_max) == \
                sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+
+
+@given("a non-empty contact list", target_fixture="non_empty_contact_list")
+def non_empty_contact_list(db, app):
+    if not db.get_contact_list():
+        app.contact.create(Contact(firstname="First_test", lastname="Last_test"))
+    return db.get_contact_list()
+
+
+@given("a random contact from the list", target_fixture="random_contact")
+def random_contact(non_empty_contact_list):
+    return random.choice(non_empty_contact_list)
+
+
+@when("I delete the contact from the list")
+def delete_contact(app, random_contact):
+    app.contact.delete_contact_by_id(random_contact.id)
+
+
+@then("the new contact list is equal to the old list without the deleted contact")
+def verify_contact_deleted(app, db, non_empty_contact_list, random_contact, check_ui):
+    old_contacts = non_empty_contact_list
+    assert len(old_contacts) - 1 == app.contact.count()
+    new_contacts = db.get_contact_list()
+    old_contacts.remove(random_contact)
+    assert old_contacts == new_contacts
+    if check_ui:
+        assert sorted(map(clear_contact, new_contacts), key=Contact.id_or_max) \
+               == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)

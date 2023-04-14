@@ -9,3 +9,10 @@ Scenario Outline: Add new contact
   | firstname  | lastname  | address  | email | mobile  |
   | firstname1 | lastname1 | address1 | email1| mobile1 |
   | firstname2 | lastname2 | address2 | email2| mobile2 |
+
+
+Scenario: Delete a contact
+  Given a non-empty contact list
+  Given a random contact from the list
+  When I delete the contact from the list
+  Then the new contact list is equal to the old list without the deleted contact
