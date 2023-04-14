@@ -1,7 +1,7 @@
-from pytest_bdd import given, when, then
+from pytest_bdd import given, when, then, parsers
 import random
 
-from fixture.processing import clear_group, clear_group_to_db
+from fixture.processing import clear_group, clear_group_to_db, propagate
 from model.group import Group
 
 
@@ -10,7 +10,7 @@ def group_list(db):
     return db.get_group_list()
 
 
-@given("a group with <name>, <header> and <footer>", target_fixture="new_group")
+@given(parsers.parse("a group with {name}, {header} and {footer}"), target_fixture="new_group")
 def new_group(name, header, footer):
     return Group(name=name, header=header, footer=footer)
 
@@ -55,6 +55,23 @@ def verify_group_deleted(db, non_empty_group_list, random_group, app, check_ui):
     new_groups = db.get_group_list()
     old_groups.remove(random_group)
     assert old_groups == new_groups
+    if check_ui:
+        assert sorted(map(clear_group, new_groups), key=Group.id_or_max) == \
+               sorted(app.group.get_group_list(), key=Group.id_or_max)
+
+
+@when("I edit the group in the list according to given group")
+def edit_group(app, random_group, new_group):
+    app.group.edit_group_by_id(random_group.id, new_group)
+
+
+@then("the new group list is equal to the old list with the edited group")
+def verify_group_edited(db, non_empty_group_list, new_group, random_group, app, check_ui):
+    old_groups = non_empty_group_list
+    new_groups = db.get_group_list()
+    old_groups.remove(random_group)
+    old_groups.append(propagate(random_group, new_group))
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
         assert sorted(map(clear_group, new_groups), key=Group.id_or_max) == \
                sorted(app.group.get_group_list(), key=Group.id_or_max)
