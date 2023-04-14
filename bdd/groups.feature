@@ -18,7 +18,7 @@ Scenario: Delete a group
   Then the new group list is equal to the old list without the deleted group
 
 
-Scenario: Edit a group
+Scenario Outline: Edit a group
   Given a non-empty group list
   Given a random group from the list
   Given a group with <name>, <header> and <footer>
