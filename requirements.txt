@@ -3,5 +3,5 @@ pony~=0.7.16
 selenium~=4.8.3
 jsonpickle~=3.0.1
 pytest~=7.2.2
-importlib~=1.0.4
+importlib
 pytest-bdd~=6.1.1
