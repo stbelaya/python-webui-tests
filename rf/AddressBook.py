@@ -6,11 +6,13 @@ from fixture.orm import ORMFixture
 from model.group import Group
 
 
-class AddressBook:
+class AddressBook(object):
 
     ROBOT_LIBRARY_SCOPE = 'SUITE'
 
     def __init__(self, config="target.json", browser="chrome"):
+        self.dbfixture = None
+        self.fixture = None
         self.browser = browser
         config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", config)
         with open(config_file) as f:
@@ -27,5 +29,14 @@ class AddressBook:
     def destroy_fixtures(self):
         self.fixture.destroy()
 
-    def create_group(self, name, header, footer):
-        self.fixture.group.create(Group(name=name, header=header, footer=footer))
+    def new_group(self, name, header, footer):
+        return Group(name=name, header=header, footer=footer)
+
+    def get_group_list(self):
+        return self.dbfixture.get_group_list()
+
+    def create_group(self, group):
+        self.fixture.group.create(group)
+
+    def group_lists_should_be_equal(self, list1, list2):
+        assert sorted(list1, key=Group.id_or_max) == sorted(list2, key=Group.id_or_max)
