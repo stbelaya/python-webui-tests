@@ -7,6 +7,8 @@ from fixture.processing import clear_contact_to_db
 from model.group import Group
 
 
+@allure.feature("Remove contact from group")
+@allure.description("User can delete a random contact from a random group")
 def test_del_contact_from_group(app, db):
     with allure.step("Given a non-empty group list"):
         groups = db.get_group_list()

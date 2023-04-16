@@ -5,6 +5,8 @@ from fixture.processing import clear_group, clear_group_to_db
 from model.group import Group
 
 
+@allure.feature("Add group")
+@allure.description("User can add a new group with empty fields, space fields, random generated fields")
 def test_add_group(app, db, json_groups, check_ui):
     group = json_groups
     with allure.step("Given a group list"):

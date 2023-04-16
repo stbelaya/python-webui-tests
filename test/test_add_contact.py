@@ -5,6 +5,8 @@ from model.contact import Contact
 from fixture.processing import clear_contact, clear_contact_to_db
 
 
+@allure.feature("Add contact")
+@allure.description("User can add a new contact with empty fields, space fields, random generated fields")
 def test_add_contact(app, json_contacts, db, check_ui):
     contact = json_contacts
     with allure.step("Given a contact list"):

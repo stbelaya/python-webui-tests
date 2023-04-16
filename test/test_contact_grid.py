@@ -5,6 +5,8 @@ from fixture.processing import merge_phones_like_on_home_page, merge_emails_like
     clear_spaces
 
 
+@allure.feature("Contact grid on the homepage")
+@allure.description("Check that contact data from the homepage is displayed accordingly to contact data from DB")
 def test_contact_grid_on_home_page(app, json_contacts, db):
     with allure.step("Given a non-empty contact list from UI"):
         if not db.get_contact_list():

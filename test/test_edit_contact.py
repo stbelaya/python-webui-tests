@@ -6,6 +6,8 @@ from model.contact import Contact
 from fixture.processing import propagate, clear_contact
 
 
+@allure.feature("Edit random contact")
+@allure.description("User can edit a random contact to have empty fields, space fields, random generated fields")
 def test_edit_some_contact(app, json_contacts, db, check_ui):
     with allure.step("Given a non-empty contact list"):
         if not db.get_contact_list():

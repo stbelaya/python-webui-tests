@@ -7,6 +7,8 @@ from fixture.processing import clear_contact_to_db
 from model.group import Group
 
 
+@allure.feature("Add contact to group")
+@allure.description("User can add a random contact to a random group")
 def test_add_contact_to_group(app, db):
     with allure.step("Given a non-empty group list"):
         groups = db.get_group_list()

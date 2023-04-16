@@ -5,6 +5,8 @@ from fixture.processing import clear_contact
 from model.contact import Contact
 
 
+@allure.feature("Delete contact")
+@allure.description("User can delete a random contact from the contact list")
 def test_delete_some_contact(app, db, check_ui):
     with allure.step("Given a non-empty contact list"):
         if not db.get_contact_list():

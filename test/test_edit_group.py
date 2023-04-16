@@ -6,6 +6,8 @@ from fixture.processing import propagate, clear_group
 from model.group import Group
 
 
+@allure.feature("Edit random group")
+@allure.description("User can edit a random group to have empty fields, space fields, random generated fields")
 def test_edit_some_group(app, json_groups, db, check_ui):
     with allure.step("Given a non-empty group list"):
         if not db.get_group_list():

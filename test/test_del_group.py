@@ -5,6 +5,8 @@ from model.group import Group
 from fixture.processing import clear_group
 
 
+@allure.feature("Delete group")
+@allure.description("User can delete a random group from the group list")
 def test_delete_some_group(app, db, check_ui):
     with allure.step("Given a non-empty group list"):
         if not db.get_group_list():
