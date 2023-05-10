@@ -27,4 +27,4 @@ def test_add_contact_to_group(app, db):
     with allure.step(f"When I add the contact {contact} to the group {group}"):
         app.contact.add_contact_to_group(contact.id, group.id)
     with allure.step("Then the contact is in the group"):
-        assert clear_contact_to_db(contact) in db.get_contacts_in_group(group)
+        assert clear_contact_to_db(contact) in db.get_contacts_in_group(group), "Contact is not added to the group"

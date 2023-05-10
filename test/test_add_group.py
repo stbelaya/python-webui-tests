@@ -16,7 +16,9 @@ def test_add_group(app, db, json_groups, check_ui):
     with allure.step("the new group list is equal to the old list with the added group"):
         new_groups = db.get_group_list()
         old_groups.append(clear_group_to_db(group))
-        assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+        assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max), \
+            "New group list from DB and group list with added group are not equal"
         if check_ui:
             assert sorted(map(clear_group, new_groups), key=Group.id_or_max) == \
-                   sorted(app.group.get_group_list(), key=Group.id_or_max)
+                   sorted(app.group.get_group_list(), key=Group.id_or_max), \
+                "Group lists from DB and from UI are not equal"
